@@ -616,7 +616,14 @@ function renderSprintBacklog() {
          * - Appeler renderSprintBacklog() et renderBoard() pour mettre à jour l'affichage
          */
         function startSprint(sprintNum) {
-            // À IMPLÉMENTER
+            const sprintStories = userStories.filter(s => s.sprint === sprintNum && s.status === 'backlog');
+            sprintStories.forEach(story => {story.status = 'todo';
+                boardStories.push(story);
+            });
+
+            userStories =    userStories.filter(s => !(s.sprint === sprintNum && s.status === 'todo'));
+
+            renderSprintBacklog()
         }
 
         /**
