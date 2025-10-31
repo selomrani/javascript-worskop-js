@@ -456,7 +456,7 @@
             const select  = document.getElementById("storyAssignee");
 
             for(let i=0; i<collaborators.length; i++){
-                select.innerHTML = `<option value="">${collaborators[i]}</option>`
+                select.innerHTML += `<option value="">${collaborators[i]}</option>`
             }
           
         }
