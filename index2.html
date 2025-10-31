@@ -464,7 +464,7 @@
         /**
          * Fonction pour créer une nouvelle User Story
          * TODO:
-         * - Récupérer les valeurs des champs: storyTitle, storyDescription, storySprint, storyAssignee
+         * - Récupérer les valeurs des champs: storyTitle, storyDescription, ,  
          * - Vérifier que le titre et la description ne sont pas vides
          * - Créer un objet story avec: id (utiliser storyIdCounter++), title, description, sprint (parseInt), assignee, status: 'backlog'
          * - Ajouter la story au tableau 'userStories'
@@ -473,6 +473,18 @@
          */
         function addUserStory() {
             // À IMPLÉMENTER
+            const storyTitle = document.getElementById("storyTitle").value;
+            const storyDescription = document.getElementById("storyDescription").value;
+            const storySprint = document.getElementById("storySprint").value;
+            const storyAssignee = document.getElementById("storyAssignee").value;
+
+            if(storyTitle === '' && storyDescription === ''){
+                alert("les champs sont oblegatoire est remplie");
+            }else{
+                
+            }
+
+            
         }
 
         /**
