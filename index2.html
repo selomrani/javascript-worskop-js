@@ -395,11 +395,12 @@
          */
         function addCollaborator() {
             const collaboratorNameInput = document.getElementById('collaboratorName');
-            const name = collaboratorNameInput.value.trim();
-            if (name === "") {
+            const name = collaboratorNameInput.value
+            if (name === "" || name ===" ") {
                 alert("Name cannot be empty")
+                return
             }
-            if (collaborators.includes(name)) {
+            else if (collaborators.includes(name)) {
                 alert("This colaborator already exits");
             }
             collaborators.push(name);
