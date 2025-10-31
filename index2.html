@@ -622,6 +622,7 @@ function renderSprintBacklog() {
             userStories =    userStories.filter(s => !(s.sprint === sprintNum && s.status === 'todo'));
 
             renderSprintBacklog()
+            renderBoard()
         }
 
         /**
