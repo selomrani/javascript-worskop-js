@@ -489,9 +489,40 @@
          */
         function renderSprintBacklog() {
            
-            // À IMPLÉMENTER
-            
-        }
+             // À IMPLÉMENTER
+
+  //  jib countainer fen kaynen ga3 les sprints
+  let backlog = document.getElementById("sprintBacklog");
+
+  //variable bach iched ga3 html
+  let html = "";
+
+  // Loopf ga3 3 sprints(1, 2, 3)
+  for (let i = 1; i <= 3; i++) {
+    //  filtri stories li f dek sprint o ba9ya f backlog
+    let sprintStories = userStories.filter(
+      story => story.sprint === i && story.status === "backlog"
+    );
+
+    //strat html dial sprint
+    html += `
+      <div class="sprint-container">
+        <div class="sprint-header">
+          <h3>Sprint ${i}</h3>
+          <button class="start-sprint-btn" onclick="startSprint(${i})">Demarrer Sprint</button>
+        </div>
+        <div class="sprint-stories">
+    `;
+
+    // checki condition dialmakyn ta sotrie
+    if (sprintStories.length === 0) {
+      html += <p class="empty-state">Aucune story dans ce sprint</p>;
+    } else {
+      //tban ay stories f had sprint
+      for (let j = 0; j < sprintStories.length; j++) {
+        let s = sprintStories[j];
+        html +=
+        
 
         /**
          * Fonction appelée lors du clic sur "Démarrer Sprint"
