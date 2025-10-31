@@ -499,62 +499,6 @@
             }
              
         
-
-
-            
-    
-
-       
-
-
-/*function addUserStory() {
-
-  let title = document.getElementById("storyTitle").value;
-  let description = document.getElementById("storyDescription").value;
-  let sprint = parseInt(document.getElementById("storySprint").value);
-  let assignee = document.getElementById("storyAssignee").value;
-
-  
-  if (title === "" || description === "") {
-    alert("Le titre et la description sont obligatoires !");
-    return;
-  }
-
-  
-  let story = {
-    id: storyIdCounter++,
-    title: title,
-    description: description,
-    sprint: sprint,
-    assignee: assignee,
-    status: "backlog"
-  };
-
-
-  userStories.push(story);
-
-  
-  document.getElementById("storyTitle").value = "";
-  document.getElementById("storyDescription").value = "";
-
-
-  renderSprintBacklog();
-}
-
-  */          // À IMPLÉMENTER
-        /**
-         * Fonction pour afficher le Sprint Backlog avec toutes les stories par sprint
-         * TODO:
-         * - Récupérer le conteneur avec l'id 'sprintBacklog'
-         * - Pour chaque sprint (1, 2, 3):
-         *   - Filtrer les stories du sprint avec status 'backlog'
-         *   - Générer le HTML: conteneur sprint avec header (titre + bouton Start)
-         *   - Pour chaque story: afficher titre, description, assigné
-         *   - Si aucune story: afficher "Aucune story dans ce sprint"
-         * - Injecter tout le HTML généré dans le conteneur
-         */
-           
-        // Fonction pour afficher les stories dans le Sprint Backlog
 function renderSprintBacklog() {
   let backlog = document.getElementById("sprintBacklog");
   let html = "";
@@ -641,6 +585,8 @@ function renderSprintBacklog() {
          */
         function renderBoard() {
             // À IMPLÉMENTER
+
+            const colums = c
         }
 
         /**
