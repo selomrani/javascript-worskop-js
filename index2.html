@@ -395,8 +395,8 @@
          */
         function addCollaborator() {
             const collaboratorNameInput = document.getElementById('collaboratorName');
-            const name = collaboratorNameInput.value
-            if (name === "" || name ===" ") {
+            const name = collaboratorNameInput.value.trim()
+            if (name === "") {
                 alert("Name cannot be empty")
                 return
             }
@@ -480,27 +480,29 @@
             const storySprint = document.getElementById("storySprint").value;
             const storyAssignee = document.getElementById("storyAssignee").value;
 
-            let story = {
-                id: storyIdCounter,
-                title: "title1",
-                description: "description 1",
-                sprint: parseInt("sprint1"),
-                assigne: "test1",
-                status: "backlog",
-            }
-         
-            userStories.push(story);
-            console.log(userStories);
-            
-              
-
-            if(storyTitle === '' && storyDescription === ''){
+             if(storyTitle === '' && storyDescription === ''){
                 alert("les champs sont oblegatoire est remplie");
                 return;
             }
+            let story = {
+                 id: storyIdCounter++,
+                title: storyTitle,
+                description: storyDescription,
+                sprint: parseInt(storySprint),
+                assigne: storyAssignee,
+                status: "backlog",
+            }
+            userStories.push(story);
+            
+            renderSprintBacklog();
+               
+            }
+             
+        
+
 
             
-        }
+    
 
        
 
