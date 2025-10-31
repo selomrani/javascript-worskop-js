@@ -465,17 +465,81 @@
         /**
          * Fonction pour créer une nouvelle User Story
          * TODO:
-         * - Récupérer les valeurs des champs: storyTitle, storyDescription, storySprint, storyAssignee
+         * - Récupérer les valeurs des champs: storyTitle, storyDescription, ,  
          * - Vérifier que le titre et la description ne sont pas vides
          * - Créer un objet story avec: id (utiliser storyIdCounter++), title, description, sprint (parseInt), assignee, status: 'backlog'
          * - Ajouter la story au tableau 'userStories'
          * - Vider les champs titre et description
          * - Appeler renderSprintBacklog() pour actualiser l'affichage
          */
+
         function addUserStory() {
             // À IMPLÉMENTER
+            const storyTitle = document.getElementById("storyTitle").value;
+            const storyDescription = document.getElementById("storyDescription").value;
+            const storySprint = document.getElementById("storySprint").value;
+            const storyAssignee = document.getElementById("storyAssignee").value;
+
+            let story = {
+                id: storyIdCounter,
+                title: "title1",
+                description: "description 1",
+                sprint: parseInt("sprint1"),
+                assigne: "test1",
+                status: "backlog",
+            }
+         
+            userStories.push(story);
+            console.log(userStories);
+            
+              
+
+            if(storyTitle === '' && storyDescription === ''){
+                alert("les champs sont oblegatoire est remplie");
+                return;
+            }
+
+            
         }
 
+       
+
+
+/*function addUserStory() {
+
+  let title = document.getElementById("storyTitle").value;
+  let description = document.getElementById("storyDescription").value;
+  let sprint = parseInt(document.getElementById("storySprint").value);
+  let assignee = document.getElementById("storyAssignee").value;
+
+  
+  if (title === "" || description === "") {
+    alert("Le titre et la description sont obligatoires !");
+    return;
+  }
+
+  
+  let story = {
+    id: storyIdCounter++,
+    title: title,
+    description: description,
+    sprint: sprint,
+    assignee: assignee,
+    status: "backlog"
+  };
+
+
+  userStories.push(story);
+
+  
+  document.getElementById("storyTitle").value = "";
+  document.getElementById("storyDescription").value = "";
+
+
+  renderSprintBacklog();
+}
+
+  */          // À IMPLÉMENTER
         /**
          * Fonction pour afficher le Sprint Backlog avec toutes les stories par sprint
          * TODO:
@@ -487,11 +551,57 @@
          *   - Si aucune story: afficher "Aucune story dans ce sprint"
          * - Injecter tout le HTML généré dans le conteneur
          */
-        function renderSprintBacklog() {
            
-            // À IMPLÉMENTER
-            
-        }
+        // Fonction pour afficher les stories dans le Sprint Backlog
+function renderSprintBacklog() {
+  let backlog = document.getElementById("sprintBacklog");
+  let html = "";
+
+  // Parcourir les 3 sprints
+  for (let i = 1; i <= 3; i++) {
+   
+    let sprintStories = userStories.filter(
+      story => story.sprint === i && story.status === "backlog"
+    );
+
+    // Crer le bloc du sprint
+    html += `
+      <div class="sprint-container">
+        <div class="sprint-header">
+          <h3>Sprint ${i}</h3>
+          <button class="start-sprint-btn" onclick="startSprint(${i})">
+            Démarrer Sprint
+          </button>
+        </div>
+        <div class="sprint-stories">
+    `;
+
+  
+    if (sprintStories.length === 0) {
+      html += `<p class="empty-state">Aucune story dans ce sprint</p>`;
+    } else {
+   
+      for (let s of sprintStories) {
+        html += `
+          <div class="story-item">
+            <strong>${s.title}</strong>
+            <p>${s.description}</p>
+            <small>Assigne a : ${s.assignee || "Non assign"}</small>
+          </div>
+        `;
+      }
+    }
+
+    //  Fermer balises
+    html += `</div></div>`;
+  }
+
+  // njectei tout dans la page
+  backlog.innerHTML = html;
+
+
+}
+
 
         /**
          * Fonction appelée lors du clic sur "Démarrer Sprint"
