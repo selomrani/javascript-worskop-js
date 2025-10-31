@@ -395,11 +395,12 @@
          */
         function addCollaborator() {
             const collaboratorNameInput = document.getElementById('collaboratorName');
-            const name = collaboratorNameInput.value.trim();
-            if (name === "") {
+            const name = collaboratorNameInput.value
+            if (name === "" || name ===" ") {
                 alert("Name cannot be empty")
+                return
             }
-            if (collaborators.includes(name)) {
+            else if (collaborators.includes(name)) {
                 alert("This colaborator already exits");
             }
             collaborators.push(name);
@@ -478,10 +479,23 @@
             const storySprint = document.getElementById("storySprint").value;
             const storyAssignee = document.getElementById("storyAssignee").value;
 
+            let story = {
+                id: storyIdCounter,
+                title: "title1",
+                description: "description 1",
+                sprint: parseInt("sprint1"),
+                assigne: "test1",
+                status: "backlog",
+            }
+         
+            userStories.push(story);
+            console.log(userStories);
+            
+              
+
             if(storyTitle === '' && storyDescription === ''){
                 alert("les champs sont oblegatoire est remplie");
-            }else{
-                
+                return;
             }
 
             
@@ -499,7 +513,9 @@
          * - Injecter tout le HTML généré dans le conteneur
          */
         function renderSprintBacklog() {
+           
             // À IMPLÉMENTER
+            
         }
 
         /**
