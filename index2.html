@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +24,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
 
@@ -64,7 +65,9 @@
             margin-bottom: 15px;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 8px;
@@ -72,12 +75,15 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: #667eea;
         }
 
-        input[type="text"], textarea {
+        input[type="text"],
+        textarea {
             flex: 1;
         }
 
@@ -155,7 +161,7 @@
             margin-bottom: 10px;
             border-radius: 8px;
             border-left: 4px solid #667eea;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .story-item strong {
@@ -224,14 +230,14 @@
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             cursor: move;
             transition: all 0.3s;
         }
 
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .card h4 {
@@ -303,6 +309,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -387,7 +394,19 @@
          * - Appeler updateAssigneeSelect() pour mettre à jour le select d'assignation
          */
         function addCollaborator() {
-            // À IMPLÉMENTER
+            const collaboratorNameInput = document.getElementById('collaboratorName');
+            const name = collaboratorNameInput.value.trim()
+            if (name === "") {
+                alert("Name cannot be empty")
+                return
+            }
+            else if (collaborators.includes(name)) {
+                alert("This colaborator already exits");
+            }
+            collaborators.push(name);
+            collaboratorNameInput.value = '';
+            updateCollaboratorsList();
+            updateAssigneeSelect();
         }
 
         /**
@@ -398,9 +417,33 @@
          * - Utiliser un style inline: background #667eea, color white, padding 8px 15px, border-radius 20px
          * - Injecter le HTML dans l'élément avec innerHTML
          */
-        function updateCollaboratorsList() {
+ function updateCollaboratorsList() {
+
             // À IMPLÉMENTER
-        }
+        let list = document.getElementById("collaboratorsList");   // jib element fen showi names
+  // If  makynach ta collaborts ba9i
+         if (collaborators.length === 0) {
+        list.innerHTML = "non collaborts ajoutees .";
+        return;
+  }
+
+  // Creee varibel in html
+  let html = "";
+  // Loop f gga3 les collbators
+  for (let i = 0; i < collaborators.length; i++) {
+    html += `<span style="
+      background: #667eea;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin: 5px;
+      display: inline-block;
+    ">${collaborators[i]}</span>`;
+  }
+
+  // nzed html page
+  list.innerHTML = html;
+}
 
         /**
          * Fonction pour mettre à jour la liste déroulante des assignés
@@ -411,36 +454,100 @@
          */
         function updateAssigneeSelect() {
             // À IMPLÉMENTER
+            const select  = document.getElementById("storyAssignee");
+            select.innerHTML = "<option>Non assigné</option>";
+            for(let i= 0; i<collaborators.length; i++){
+                select.innerHTML += `<option>${collaborators[i]}</option>`
+            }
+          
         }
 
         /**
          * Fonction pour créer une nouvelle User Story
          * TODO:
-         * - Récupérer les valeurs des champs: storyTitle, storyDescription, storySprint, storyAssignee
+         * - Récupérer les valeurs des champs: storyTitle, storyDescription, ,  
          * - Vérifier que le titre et la description ne sont pas vides
          * - Créer un objet story avec: id (utiliser storyIdCounter++), title, description, sprint (parseInt), assignee, status: 'backlog'
          * - Ajouter la story au tableau 'userStories'
          * - Vider les champs titre et description
          * - Appeler renderSprintBacklog() pour actualiser l'affichage
          */
+
         function addUserStory() {
             // À IMPLÉMENTER
-        }
+            const storyTitle = document.getElementById("storyTitle").value;
+            const storyDescription = document.getElementById("storyDescription").value;
+            const storySprint = document.getElementById("storySprint").value;
+            const storyAssignee = document.getElementById("storyAssignee").value;
 
-        /**
-         * Fonction pour afficher le Sprint Backlog avec toutes les stories par sprint
-         * TODO:
-         * - Récupérer le conteneur avec l'id 'sprintBacklog'
-         * - Pour chaque sprint (1, 2, 3):
-         *   - Filtrer les stories du sprint avec status 'backlog'
-         *   - Générer le HTML: conteneur sprint avec header (titre + bouton Start)
-         *   - Pour chaque story: afficher titre, description, assigné
-         *   - Si aucune story: afficher "Aucune story dans ce sprint"
-         * - Injecter tout le HTML généré dans le conteneur
-         */
-        function renderSprintBacklog() {
-            // À IMPLÉMENTER
-        }
+             if(storyTitle === '' && storyDescription === ''){
+                alert("les champs sont oblegatoire est remplie");
+                return;
+            }
+            let story = {
+                 id: storyIdCounter++,
+                title: storyTitle,
+                description: storyDescription,
+                sprint: parseInt(storySprint),
+                assigne: storyAssignee,
+                status: "backlog",
+            }
+            userStories.push(story);
+            
+            renderSprintBacklog();
+               
+            }
+             
+        
+function renderSprintBacklog() {
+  let backlog = document.getElementById("sprintBacklog");
+  let html = "";
+
+  // Parcourir les 3 sprints
+  for (let i = 1; i <= 3; i++) {
+   
+    let sprintStories = userStories.filter(
+      story => story.sprint === i && story.status === "backlog"
+    );
+
+    // Crer le bloc du sprint
+    html += `
+      <div class="sprint-container">
+        <div class="sprint-header">
+          <h3>Sprint ${i}</h3>
+          <button class="start-sprint-btn" onclick="startSprint(${i})">
+            Démarrer Sprint
+          </button>
+        </div>
+        <div class="sprint-stories">
+    `;
+
+  
+    if (sprintStories.length === 0) {
+      html += `<p class="empty-state">Aucune story dans ce sprint</p>`;
+    } else {
+   
+      for (let s of sprintStories) {
+        html += `
+          <div class="story-item">
+            <strong>${s.title}</strong>
+            <p>${s.description}</p>
+            <small>Assigne a : ${s.assigne || "Non assign"}</small>
+          </div>
+        `;
+      }
+    }
+
+    //  Fermer balises
+    html += `</div></div>`;
+  }
+
+  // njectei tout dans la page
+  backlog.innerHTML = html;
+
+
+}
+
 
         /**
          * Fonction appelée lors du clic sur "Démarrer Sprint"
@@ -453,7 +560,15 @@
          * - Appeler renderSprintBacklog() et renderBoard() pour mettre à jour l'affichage
          */
         function startSprint(sprintNum) {
-            // À IMPLÉMENTER
+            const sprintStories = userStories.filter(s => s.sprint === sprintNum && s.status === 'backlog');
+            sprintStories.forEach(story => {story.status = 'todo';
+                boardStories.push(story);
+            });
+
+            userStories =    userStories.filter(s => !(s.sprint === sprintNum && s.status === 'todo'));
+
+            renderSprintBacklog()
+            renderBoard()
         }
 
         /**
@@ -470,6 +585,8 @@
          */
         function renderBoard() {
             // À IMPLÉMENTER
+
+            const colums = c
         }
 
         /**
@@ -518,4 +635,5 @@
         renderBoard();
     </script>
 </body>
+
 </html>
