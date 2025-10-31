@@ -416,9 +416,33 @@
          * - Utiliser un style inline: background #667eea, color white, padding 8px 15px, border-radius 20px
          * - Injecter le HTML dans l'élément avec innerHTML
          */
-        function updateCollaboratorsList() {
+ function updateCollaboratorsList() {
+
             // À IMPLÉMENTER
-        }
+        let list = document.getElementById("collaboratorsList");   // jib element fen showi names
+  // If  makynach ta collaborts ba9i
+         if (collaborators.length === 0) {
+        list.innerHTML = "non collaborts ajoutees .";
+        return;
+  }
+
+  // Creee varibel in html
+  let html = "";
+  // Loop f gga3 les collbators
+  for (let i = 0; i < collaborators.length; i++) {
+    html += `<span style="
+      background: #667eea;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin: 5px;
+      display: inline-block;
+    ">${collaborators[i]}</span>`;
+  }
+
+  // nzed html page
+  list.innerHTML = html;
+}
 
         /**
          * Fonction pour mettre à jour la liste déroulante des assignés
